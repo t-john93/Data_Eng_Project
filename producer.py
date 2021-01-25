@@ -35,6 +35,7 @@ urllib.request.urlretrieve(url,datafile)
 slack_uri = 'https://hooks.slack.com/services/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'
 
 
+delivered_records = 0
 # # # Optional per-message on_delivery handler (triggered by poll() or flush())
 # # # when a message has been successfully delivered or
 # # # permanently failed delivery (after retries).
@@ -77,15 +78,14 @@ if __name__ == '__main__':
     # # # Create topic if needed
     ccloud_lib.create_topic(conf, topic)
 
-    delivered_records = 0
 
     with open('/home/shared_dir/assignment_1/examples/clients/cloud/python/datafile.json') as f:
         data = json.load(f)
 
         crumb_count = 0
         for record in data:
-            # if crumb_count > 1000:
-            #     break
+            if crumb_count > 1000:
+                break
             record_key = 'breadcrumb'
             record_value = record
             json_data = json.dumps(record_value)
