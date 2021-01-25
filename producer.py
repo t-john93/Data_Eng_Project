@@ -84,12 +84,12 @@ if __name__ == '__main__':
 
         crumb_count = 0
         for record in data:
-            if crumb_count > 1000:
-                break
+            # if crumb_count > 1000:
+            #     break
             record_key = 'breadcrumb'
             record_value = record
             json_data = json.dumps(record_value)
-            print("Producing record: {}\t{}".format(record_key, record_value))
+            print("Producing record: {}\t{}\t{}".format(crumb_count, record_key, record_value))
             producer.produce(topic, key=record_key, value=json_data, on_delivery=acked)
             # p.poll() serves delivery reports (on_delivery)
             # from previous produce() calls.
